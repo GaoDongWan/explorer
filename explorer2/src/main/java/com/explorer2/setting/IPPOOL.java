@@ -70,7 +70,7 @@ public class IPPOOL {
 
 	public static void addFromWeb() {
 		urlList = (UrlList) BEANS.SEEDS.getBean("seedlist");
-		for (int i = 1; i < 3; i++) {
+		for (int i = 1; i < 2; i++) {
 			String url = "http://www.xicidaili.com/nn/" + i;
 			Document ipdoc = null;
 			Elements ips = null;
@@ -96,11 +96,15 @@ public class IPPOOL {
 						ipItem.setFlag(ipItem.getFlag() + seed.getFlag());
 					}
 				}
-				System.out.println((ipItem.getFlag() > 0) ? (" good proxy " + Long.toBinaryString(ipItem.getFlag()))
-						: (" bad proxy"));
+				if (ipItem.getFlag() > 0) {
+					System.out.println(" good proxy " + Long.toBinaryString(ipItem.getFlag()));
+					ipPool.add(ipItem);
+				} else {
+					System.out.println(" bad proxy ");
+				}
 			}
 		}
-		
+
 	}
 
 	private static boolean check(Ip ipItem, String url) {

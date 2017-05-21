@@ -10,6 +10,9 @@ public class TimeFormat {
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
+		if(time.startsWith("\"")&&time.endsWith("\"")){
+			time=time.substring(1, time.length()-1);
+		}
 		if (time.endsWith("前")) {
 			if (time.substring(time.length() - 3, time.length()).equals("小时前")) {
 				if ((date.getHours() - Integer.parseInt(time.substring(0, time.length() - 3))) >= 0)

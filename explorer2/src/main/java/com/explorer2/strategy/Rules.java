@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.explorer2.entity.JobInfo;
 import com.explorer2.setting.JobRBF;
 import com.explorer2.setting.UrlRBF;
 
@@ -19,7 +20,9 @@ public abstract class Rules {
 		this.urlRegex = urlRegex;
 	}
 
-	public void analyzeDoc(Document doc,Queue waitUrl,UrlRBF URBF,JobRBF JRBF){
+	public boolean analyzeDoc(Document doc,Queue waitUrl,UrlRBF URBF,JobRBF JRBF){
+		if(doc==null)
+			return true;
 		Elements urls=doc.select(urlRegex);
 		if(urls.first()!=null){
 			for(Element url:urls){
@@ -31,12 +34,15 @@ public abstract class Rules {
 		}
 		Elements jobInfos=doc.select(jobRegex);
 		if(jobInfos.first()!=null){
-			Element jobInfo=jobInfos.first();
-			if(!JRBF.contains(jobInfo.text())){
-			JRBF.add(jobInfo.text());
-			infoStore(jobInfo);
+			Element jobDoc=jobInfos.first();
+			JobInfo jobInfo=new JobInfo();
+			infoExtract(jobInfo,jobDoc);
+			if(!JRBF.contains(jobInfo.toString())){
+				JRBF.add(jobInfo.toString());
+				infoStore(jobInfo,"");
 			}
 		}
+		return (urls.first()==null);
 	}
 	public String getJobRegex() {
 		return jobRegex;
@@ -44,7 +50,10 @@ public abstract class Rules {
 	public String getUrlRegex() {
 		return urlRegex;
 	}
-	public void infoStore(Element jobInfo){
+	public void infoExtract(JobInfo jobInfo,Element jobDoc){
 		System.out.println("未重写详细抓取规则方法");
+	}
+	public void infoStore(JobInfo jobInfo,String path){
+		System.out.println("未设置文件存放路径");
 	}
 }

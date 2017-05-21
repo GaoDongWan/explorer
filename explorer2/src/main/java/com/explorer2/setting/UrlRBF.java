@@ -126,5 +126,14 @@ public class UrlRBF {
 			return (cap - 1) & result;
 		}
 	}
+/*	public static void main(String[] args){
+		UrlRBF a=new UrlRBF("jobinfo");
+		
+		if(a.contains("网站稳定性工程师,专家-18-42万-上海-浦东新区-本科及以上 3年以上经验 英语 + 普通话 25-40岁-阿里巴巴-2017-05-15-")){
+			System.out.println("yes");
+		}else{
+			System.out.println("no");
+		}
+	}*/
 
 }

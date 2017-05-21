@@ -7,6 +7,7 @@ public class JobInfo {
 	private String request;
 	private String company;
 	private String time;
+	private String details;
 
 	public String getPosition() {
 		return position;
@@ -49,7 +50,11 @@ public class JobInfo {
 	}
 
 	public String toString() {
-		return position + "||" + salary + "||" + site + "||" + request + "||" + company + "||" + time;
+		return position + "-" + salary + "-" + site + "-" + request + "-" + company + "-" + time;
+	}
+
+	public String toStringAll() {
+		return position + "-" + salary + "-" + site + "-" + request + "-" + company + "-" + time + "-" + details;
 	}
 
 	public String getTime() {
@@ -58,5 +63,13 @@ public class JobInfo {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }

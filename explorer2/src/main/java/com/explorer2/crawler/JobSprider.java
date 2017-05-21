@@ -18,9 +18,16 @@ public class JobSprider extends Thread {
 	private int pageCount;
 	private Rules rules;
 	private Queue<String> waitUrl = new LinkedList<String>();
-	public String getText(){
+	private boolean useProxy=false;
+
+	public void setUseProxy(boolean useProxy) {
+		this.useProxy = useProxy;
+	}
+
+	public String getText() {
 		return rules.getUrlRegex();
 	}
+
 	public void setURBF(String key) {
 		URBF = new UrlRBF(key);
 	}
@@ -55,9 +62,9 @@ public class JobSprider extends Thread {
 		while ((pageCount--) > 0) {
 			String url = waitUrl.poll();
 			do {
-				doc = Visit.getDoc(url, seed.getFlag(), false);
-			} while (doc == null);
-			rules.analyzeDoc(doc, waitUrl, URBF, JRBF);
+				doc = Visit.getDoc(url, seed.getFlag(), useProxy);
+			} while (rules.analyzeDoc(doc, waitUrl, URBF, JRBF));
+			
 		}
 	}
 }
