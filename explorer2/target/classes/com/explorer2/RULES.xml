@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	<bean id="rule-liepin" class="com.explorer2.rule.LiepinRule">
+		<property name="urlRegex"
+			value="a[href~=.*www.liepin.com/job/[0-9]+.shtml]"></property>
+		<property name="jobRegex" value="div[class=about-position]"></property>
+	</bean>
+	<bean id="rule-chinahr" class="com.explorer2.rule.ChinahrRule">
+		<property name="urlRegex"
+			value="a[href~=.*www.chinahr.com/job/[0-9]+.html]"></property>
+		<property name="jobRegex" value="div[class=job-detail-l]"></property>
+	</bean>
+</beans>
